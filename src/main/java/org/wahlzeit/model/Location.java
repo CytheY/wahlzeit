@@ -8,7 +8,7 @@ public class Location {
 
     public Coordinate coordinate = null;
 
-    public Location(Coordinate coord){
-        this.coordinate = coord;
+    public Location(double lat, double lng){
+        this.coordinate = new Coordinate(lat,lng);
     }
 }

@@ -25,8 +25,9 @@ package org.wahlzeit.model;
  */
 public class Coordinate {
 
-    private double latitude = 0.0;
-    private double longitude = 0.0;
+    private double latitude;
+    private double longitude;
+
 
     public Coordinate(double lat, double lng){
         this.latitude = lat;
