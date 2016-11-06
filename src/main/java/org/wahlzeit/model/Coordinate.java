@@ -20,18 +20,41 @@
 
 package org.wahlzeit.model;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 /**
  * Created by cyrus on 24.10.16.
  */
 public class Coordinate {
+    private static final DecimalFormat df = new DecimalFormat("#.##");
+
+    private static final int EARTH_RADIUS = 6371;
+
+    private static final double LATITUDE_MIN = -90.0;
+    private static final double LATITUDE_MAX = 90.0;
+
+    private static final double LONGITUDE_MIN = -180.0;
+    private static final double LONGITUDE_MAX = 180.0;
 
     private double latitude;
     private double longitude;
 
 
     public Coordinate(double lat, double lng){
+        if(lat < LATITUDE_MIN || lat > LATITUDE_MAX)
+            throw new IllegalArgumentException("Latitude value is invalid. Must be between -90.0 and 90.0");
+
+        if(lng < LONGITUDE_MIN || lng > LONGITUDE_MAX)
+            throw new IllegalArgumentException("Longitude value is invalid. Must be between -180.0 and 180.0");
+
+
         this.latitude = lat;
         this.longitude = lng;
+us
+        DecimalFormatSymbols sym = DecimalFormatSymbols.getInstance();
+        sym.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(sym);
     }
 
     public double getLatitude() {
@@ -53,14 +76,16 @@ public class Coordinate {
         double lon2 = this.longitude;
         lon2 = Math.toRadians(lon2);
 
-        final int R = 6371;
 
         double delta_long = (lon2 - lon1);
 
         final double delta_roh = Math.acos(Math.sin(lat1) * Math.sin(lat2) +
                                  Math.cos(lat1) * Math.cos(lat2) * Math.cos(delta_long));
 
-        final double distance = R * delta_roh;
+        double distance = EARTH_RADIUS * delta_roh;
+
+
+        distance = Double.valueOf(df.format(distance));
 
         return distance;
     }
