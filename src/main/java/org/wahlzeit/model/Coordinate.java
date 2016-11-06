@@ -51,7 +51,7 @@ public class Coordinate {
 
         this.latitude = lat;
         this.longitude = lng;
-us
+
         DecimalFormatSymbols sym = DecimalFormatSymbols.getInstance();
         sym.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(sym);
