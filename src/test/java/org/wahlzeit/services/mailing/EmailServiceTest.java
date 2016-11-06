@@ -20,7 +20,6 @@
 package org.wahlzeit.services.mailing;
 
 import junit.framework.TestCase;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.wahlzeit.main.ServiceMain;
 import org.wahlzeit.services.EmailAddress;
 
