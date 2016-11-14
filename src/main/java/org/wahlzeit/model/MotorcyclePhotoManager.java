@@ -30,11 +30,14 @@ public class MotorcyclePhotoManager extends PhotoManager {
 
     private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
 
+    public static MotorcyclePhotoManager getInstance() {
+        return instance;
+    }
     /**
      *
      */
     public Set<MotorcyclePhoto> findPhotosByType(MotorcyclePhoto.Type type) {
-        Set<MotorcyclePhoto> result = new HashSet<MotorcyclePhoto>();
+        Set<MotorcyclePhoto> result = new HashSet<>();
         readObjects(result, MotorcyclePhoto.class, "Type", type);
 
         for (Iterator<MotorcyclePhoto> i = result.iterator(); i.hasNext(); ) {
