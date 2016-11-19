@@ -42,20 +42,14 @@ public class MotorcyclePhoto extends Photo{
     private final static String NA = "N/A";
     private final static int BUILDYEAR_NA = 0000;
 
-    private String brand;
-    private String model;
-    private int buildYear;
-
-    private String name;
+    private String brand = NA;
+    private String model = NA;
+    private int buildYear = BUILDYEAR_NA;
 
 
     public MotorcyclePhoto(){
         super();
-        this.brand = NA;
-        this.model = NA;
-        this.buildYear = BUILDYEAR_NA;
-        this.name = NA;
-        this.type = Type.OTHER;
+
     }
 
     /**
@@ -63,11 +57,6 @@ public class MotorcyclePhoto extends Photo{
      */
     public MotorcyclePhoto(PhotoId myId) {
         super(myId);
-        this.brand = NA;
-        this.model = NA;
-        this.buildYear = BUILDYEAR_NA;
-        this.name = NA;
-        this.type = Type.OTHER;
     }
 
 
@@ -79,7 +68,6 @@ public class MotorcyclePhoto extends Photo{
         this.brand = brand;
         this.model = model;
         this.buildYear = buildYear;
-        this.name = brand + " " + model + "(" + buildYear + ")";
         this.type = type;
     }
 
@@ -108,11 +96,7 @@ public class MotorcyclePhoto extends Photo{
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return brand + " " + model + "(" + buildYear + ")";
     }
 
     public int getBuildYear() {
