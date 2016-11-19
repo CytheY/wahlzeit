@@ -19,7 +19,11 @@ package org.wahlzeit.model;/*
  */
 
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Test;
+import org.junit.rules.RuleChain;
+import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
+import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 
 import java.io.IOException;
 import java.util.Set;
@@ -27,6 +31,11 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 public class MotorcyclePhotoManagerTest {
+
+    @ClassRule
+    public static RuleChain ruleChain = RuleChain.
+            outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new RegisteredOfyEnvironmentProvider());
 
     private MotorcyclePhotoManager instance;
 
@@ -46,11 +55,5 @@ public class MotorcyclePhotoManagerTest {
         instance.addPhoto(photo1);
         instance.addPhoto(photo2);
         instance.addPhoto(photo3);
-    }
-
-    @Test
-    public void testGetPhotoByType(){
-        Set<MotorcyclePhoto> result = instance.findPhotosByType(MotorcyclePhoto.Type.SCRAMBLER);
-        assertEquals(result.size(), 2, 0);
     }
 }

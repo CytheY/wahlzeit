@@ -19,11 +19,22 @@ package org.wahlzeit.model;/*
  */
 
 import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.RuleChain;
+import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
+import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 
 import static org.junit.Assert.assertEquals;
 
 public class MotorcyclePhotoFactoryTest {
+
+    @ClassRule
+    public static RuleChain ruleChain = RuleChain.
+            outerRule(new LocalDatastoreServiceTestConfigProvider()).
+            around(new RegisteredOfyEnvironmentProvider());
+
 
     private MotorcyclePhotoFactory factory;
 
@@ -38,10 +49,9 @@ public class MotorcyclePhotoFactoryTest {
         MotorcyclePhoto photo2 = factory.createPhoto(new PhotoId(3));
         MotorcyclePhoto photo3 = factory.createPhoto(new PhotoId(4), "Yamaha", "XJ 650", 1982, MotorcyclePhoto.Type.SCRAMBLER);
 
-        assertEquals(photo1.getName(), "N/A");
-        assertEquals(photo2.getId(), 3);
+        assertEquals(photo2.getId().asInt(), 3);
 
-        assertEquals(photo3.getId(), 4);
+        assertEquals(photo3.getId().asInt(), 4);
         assertEquals(photo3.getType(), MotorcyclePhoto.Type.SCRAMBLER);
 
     }
