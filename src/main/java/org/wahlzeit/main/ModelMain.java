@@ -61,7 +61,6 @@ public abstract class ModelMain extends AbstractMain {
 		MotorcyclePhotoManager.getInstance().init();
 	}
 
-
 	/**
 	 *
 	 */
@@ -88,7 +87,7 @@ public abstract class ModelMain extends AbstractMain {
 		UserManager userManager = UserManager.getInstance();
 		new User(userId, nickName, emailAddress);
 
-		PhotoManager photoManager = PhotoManager.getInstance();
+		MotorcyclePhotoManager photoManager = MotorcyclePhotoManager.getInstance();
 		File photoDirFile = new File(photoDir);
 		FileFilter photoFileFilter = new FileFilter() {
 			public boolean accept(File file) {

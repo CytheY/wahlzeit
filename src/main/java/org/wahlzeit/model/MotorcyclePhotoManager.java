@@ -1,4 +1,5 @@
-package org.wahlzeit.model;/*
+package org.wahlzeit.model;
+/*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.
@@ -29,6 +30,13 @@ public class MotorcyclePhotoManager extends PhotoManager {
     protected static final MotorcyclePhotoManager instance = new MotorcyclePhotoManager();
 
     private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
+
+    /**
+     *
+     */
+    public MotorcyclePhotoManager() {
+        photoTagCollector = PhotoFactory.getInstance().createPhotoTagCollector();
+    }
 
     public static MotorcyclePhotoManager getInstance() {
         return instance;

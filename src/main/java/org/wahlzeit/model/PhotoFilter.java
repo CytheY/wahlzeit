@@ -243,7 +243,7 @@ public class PhotoFilter implements Serializable {
 
 		Collection<PhotoId> candidates;
 		if (noFilterConditions == 0) {
-			candidates = PhotoManager.getInstance().getPhotoCache().keySet();
+			candidates = MotorcyclePhotoManager.getInstance().getPhotoCache().keySet();
 		} else {
 			List<Tag> tags = new LinkedList<Tag>();
 			candidates = new LinkedList<PhotoId>();
@@ -258,7 +258,7 @@ public class PhotoFilter implements Serializable {
 
 		int newPhotos = 0;
 		for (PhotoId candidateId : candidates) {
-			Photo photoCandidate = PhotoManager.getInstance().getPhoto(candidateId);
+			Photo photoCandidate = MotorcyclePhotoManager.getInstance().getPhoto(candidateId);
 			if (!processedPhotoIds.contains(candidateId) && !skippedPhotoIds.contains(candidateId) &&
 					photoCandidate.isVisible()) {
 				result.add(candidateId);

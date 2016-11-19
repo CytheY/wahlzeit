@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 public class MotorcyclePhotoFactory extends PhotoFactory {
 
-    private static final Logger log = Logger.getLogger(PhotoFactory.class.getName());
+    private static final Logger log = Logger.getLogger(MotorcyclePhotoFactory.class.getName());
     /**
      * Hidden singleton instance; needs to be initialized from the outside.
      */

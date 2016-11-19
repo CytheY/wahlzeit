@@ -20,14 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.ModelConfig;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoId;
-import org.wahlzeit.model.PhotoManager;
-import org.wahlzeit.model.User;
-import org.wahlzeit.model.UserManager;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.services.LogBuilder;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.utils.StringUtil;
@@ -56,7 +49,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 	 */
 	protected void doMakeWebPart(UserSession us, WebPart part) {
 		PhotoId photoId = us.getPhotoId();
-		Photo photo = PhotoManager.getInstance().getPhoto(photoId);
+		Photo photo = MotorcyclePhotoManager.getInstance().getPhoto(photoId);
 		String id = photo.getId().asString();
 		ModelConfig config = us.getClient().getLanguageConfiguration();
 		part.addString(Photo.ID, id);
@@ -80,7 +73,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 	 */
 	protected boolean isWellFormedPost(UserSession us, Map args) {
 		String id = us.getAsString(args, Photo.ID);
-		Photo photo = PhotoManager.getInstance().getPhoto(id);
+		Photo photo = MotorcyclePhotoManager.getInstance().getPhoto(id);
 		return (photo != null) && us.isPhotoOwner(photo);
 	}
 
@@ -91,7 +84,7 @@ public class ShowUserPhotoFormHandler extends AbstractWebFormHandler {
 		String result = PartUtil.SHOW_USER_HOME_PAGE_NAME;
 
 		String id = us.getAndSaveAsString(args, Photo.ID);
-		Photo photo = PhotoManager.getInstance().getPhoto(id);
+		Photo photo = MotorcyclePhotoManager.getInstance().getPhoto(id);
 
 		UserManager userManager = UserManager.getInstance();
 		User user = userManager.getUserById(photo.getOwnerId());

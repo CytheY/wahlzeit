@@ -20,15 +20,7 @@
 
 package org.wahlzeit.handlers;
 
-import org.wahlzeit.model.AccessRights;
-import org.wahlzeit.model.Client;
-import org.wahlzeit.model.Photo;
-import org.wahlzeit.model.PhotoFilter;
-import org.wahlzeit.model.PhotoId;
-import org.wahlzeit.model.PhotoManager;
-import org.wahlzeit.model.PhotoSize;
-import org.wahlzeit.model.Tags;
-import org.wahlzeit.model.UserSession;
+import org.wahlzeit.model.*;
 import org.wahlzeit.utils.HtmlUtil;
 import org.wahlzeit.webparts.WebPart;
 import org.wahlzeit.webparts.Writable;
@@ -58,7 +50,7 @@ public class ShowPhotoPageHandler extends AbstractWebPageHandler implements WebF
 			photo = PhotoManager.getInstance().getPhoto(link);
 		}
 
-		PhotoManager photoManager = PhotoManager.getInstance();
+		PhotoManager photoManager = MotorcyclePhotoManager.getInstance();
 		// check if an image has been skipped
 		if (args.containsKey("prior")) {
 			String skippedPhotoIdString = us.getAsString(args, "prior");

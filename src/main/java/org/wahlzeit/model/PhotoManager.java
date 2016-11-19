@@ -48,7 +48,7 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 *
 	 */
-	protected static final PhotoManager instance = new PhotoManager();
+	protected static final MotorcyclePhotoManager instance = new MotorcyclePhotoManager();
 
 	private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
 
@@ -72,7 +72,7 @@ public class PhotoManager extends ObjectManager {
 	/**
 	 *
 	 */
-	public static PhotoManager getInstance() {
+	public static MotorcyclePhotoManager getInstance() {
 		return instance;
 	}
 
@@ -108,7 +108,7 @@ public class PhotoManager extends ObjectManager {
 		Photo result = doGetPhotoFromId(id);
 
 		if (result == null) {
-			result = PhotoFactory.getInstance().loadPhoto(id);
+			result = MotorcyclePhotoFactory.getInstance().loadPhoto(id);
 			if (result != null) {
 				doAddPhoto(result);
 			}

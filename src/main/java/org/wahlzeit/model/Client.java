@@ -301,7 +301,7 @@ public abstract class Client implements Serializable, Persistent {
 		Photo result = null;
 		while (indexOfLastPraisedPhoto >= 0 && result == null) {
 			PhotoId lastPraisedPhotoId = praisedPhotoIds.get(indexOfLastPraisedPhoto);
-			result = PhotoManager.getInstance().getPhoto(lastPraisedPhotoId);
+			result = MotorcyclePhotoManager.getInstance().getPhoto(lastPraisedPhotoId);
 			if (!result.isVisible()) {
 				result = null;
 				indexOfLastPraisedPhoto--;
