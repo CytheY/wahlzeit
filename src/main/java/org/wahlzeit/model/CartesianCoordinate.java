@@ -1,5 +1,6 @@
+package org.wahlzeit.model;
 /*
- * Copyright (c) 2006-2009 by Julian Schneider, http://dirkriehle.com
+ * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -17,19 +18,36 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package org.wahlzeit.model;
 
 import org.wahlzeit.model.interfaces.ICoordinate;
+import org.wahlzeit.utils.CoordinateUtil;
 
-/**
- * Created by cyrus on 24.10.16.
- */
-public class Location {
+public class CartesianCoordinate implements ICoordinate{
 
+    private double x, y, z;
 
-    public SphericCoordinate coordinate = null;
+    public CartesianCoordinate(double x, double y, double z){
+        // TODO
+        // check for coordinate bounds
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
-    public Location(double lat, double lng){
-        this.coordinate = new SphericCoordinate(lat,lng);
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    @Override
+    public double getDistance(ICoordinate coord) {
+        return CoordinateUtil.calculateDistance(this, coord);
     }
 }

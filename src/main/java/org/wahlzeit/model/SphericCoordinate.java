@@ -20,13 +20,13 @@
 
 package org.wahlzeit.model;
 
+import org.wahlzeit.model.interfaces.ICoordinate;
+import org.wahlzeit.utils.CoordinateUtil;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-/**
- * Created by cyrus on 24.10.16.
- */
-public class Coordinate {
+public class SphericCoordinate implements ICoordinate{
     private static final DecimalFormat df = new DecimalFormat("#.##");
 
     private static final int EARTH_RADIUS = 6371;
@@ -41,7 +41,7 @@ public class Coordinate {
     private double longitude;
 
 
-    public Coordinate(double lat, double lng){
+    public SphericCoordinate(double lat, double lng){
         if(lat < LATITUDE_MIN || lat > LATITUDE_MAX)
             throw new IllegalArgumentException("Latitude value is invalid. Must be between -90.0 and 90.0");
 
@@ -65,28 +65,12 @@ public class Coordinate {
         return longitude;
     }
 
-    public double getDistance(Coordinate coord){
-        double lat1 = coord.getLatitude();
-        lat1 = Math.toRadians(lat1);
-        double lat2 = this.latitude;
-        lat2 = Math.toRadians(lat2);
+    public int getRadius(){
+        return EARTH_RADIUS;
+    }
 
-        double lon1 = coord.getLongitude();
-        lon1 = Math.toRadians(lon1);
-        double lon2 = this.longitude;
-        lon2 = Math.toRadians(lon2);
-
-
-        double delta_long = (lon2 - lon1);
-
-        final double delta_roh = Math.acos(Math.sin(lat1) * Math.sin(lat2) +
-                                 Math.cos(lat1) * Math.cos(lat2) * Math.cos(delta_long));
-
-        double distance = EARTH_RADIUS * delta_roh;
-
-
-        distance = Double.valueOf(df.format(distance));
-
-        return distance;
+    @Override
+    public double getDistance(ICoordinate coord){
+        return CoordinateUtil.calculateDistance(this, coord);
     }
 }

@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2006-2009 by Julian Schneider, http://dirkriehle.com
+package org.wahlzeit.model.interfaces;/*
+ * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -17,19 +17,7 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package org.wahlzeit.model;
 
-import org.wahlzeit.model.interfaces.ICoordinate;
-
-/**
- * Created by cyrus on 24.10.16.
- */
-public class Location {
-
-
-    public SphericCoordinate coordinate = null;
-
-    public Location(double lat, double lng){
-        this.coordinate = new SphericCoordinate(lat,lng);
-    }
+public interface ICoordinate {
+    public double getDistance(ICoordinate coord);
 }
