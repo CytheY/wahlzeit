@@ -17,19 +17,9 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
 package org.wahlzeit.model;
 
-import org.wahlzeit.model.interfaces.ICoordinate;
-import org.wahlzeit.utils.CoordinateUtil;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-
-public class SphericCoordinate implements ICoordinate{
-    private static final DecimalFormat df = new DecimalFormat("#.##");
-
-    private static final int EARTH_RADIUS = 6371;
+public class SphericCoordinate extends AbstractCoordinate{
 
     private static final double LATITUDE_MIN = -90.0;
     private static final double LATITUDE_MAX = 90.0;
@@ -48,13 +38,8 @@ public class SphericCoordinate implements ICoordinate{
         if(lng < LONGITUDE_MIN || lng > LONGITUDE_MAX)
             throw new IllegalArgumentException("Longitude value is invalid. Must be between -180.0 and 180.0");
 
-
         this.latitude = lat;
         this.longitude = lng;
-
-        DecimalFormatSymbols sym = DecimalFormatSymbols.getInstance();
-        sym.setDecimalSeparator('.');
-        df.setDecimalFormatSymbols(sym);
     }
 
     public double getLatitude() {
@@ -65,12 +50,18 @@ public class SphericCoordinate implements ICoordinate{
         return longitude;
     }
 
-    public int getRadius(){
-        return EARTH_RADIUS;
-    }
-
     @Override
-    public double getDistance(ICoordinate coord){
-        return CoordinateUtil.calculateDistance(this, coord);
+    public CartesianCoordinate asCartesianCoordinate() {
+        double lat, lon;
+        double x, y, z;
+
+        lat = Math.toRadians(latitude);
+        lon = Math.toRadians(longitude);
+
+        x = EARTH_RADIUS * Math.cos(lat) * Math.cos(lon);
+        y = EARTH_RADIUS * Math.cos(lat) * Math.sin(lon);
+        z = EARTH_RADIUS * Math.sin(lat);
+
+        return new CartesianCoordinate(x, y, z);
     }
 }

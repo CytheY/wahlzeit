@@ -18,6 +18,10 @@ package org.wahlzeit.model.interfaces;/*
  * <http://www.gnu.org/licenses/>.
  */
 
+import org.wahlzeit.model.CartesianCoordinate;
+
 public interface ICoordinate {
     public double getDistance(ICoordinate coord);
+    public boolean isEqual(ICoordinate coord);
+    public CartesianCoordinate asCartesianCoordinate();
 }

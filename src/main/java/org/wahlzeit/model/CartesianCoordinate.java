@@ -1,4 +1,4 @@
-package org.wahlzeit.model;
+
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
@@ -19,16 +19,13 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import org.wahlzeit.model.interfaces.ICoordinate;
-import org.wahlzeit.utils.CoordinateUtil;
+package org.wahlzeit.model;
 
-public class CartesianCoordinate implements ICoordinate{
+public class CartesianCoordinate extends AbstractCoordinate{
 
     private double x, y, z;
 
     public CartesianCoordinate(double x, double y, double z){
-        // TODO
-        // check for coordinate bounds
         this.x = x;
         this.y = y;
         this.z = z;
@@ -47,7 +44,7 @@ public class CartesianCoordinate implements ICoordinate{
     }
 
     @Override
-    public double getDistance(ICoordinate coord) {
-        return CoordinateUtil.calculateDistance(this, coord);
+    public CartesianCoordinate asCartesianCoordinate() {
+        return this;
     }
 }
