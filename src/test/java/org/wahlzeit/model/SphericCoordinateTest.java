@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.wahlzeit.model.interfaces.ICoordinate;
@@ -28,19 +29,29 @@ import static org.junit.Assert.*;
 
 public class SphericCoordinateTest {
 
+    private static double ERLANGEN_LAT = 49.583333;
+    private static double ERLANGEN_LON = 11.016667;
+
+    private static double MUNICH_LAT = 48.137222;
+    private static double MUNICH_LON = 11.575556;
+
+    private static double DISTANCE_ER_MUN = 167.86;
+    private static double DISTANCE_TOLERANCE = 3.0;
+
+
     SphericCoordinate erlangen;
     SphericCoordinate munich;
 
     @Before
     public void setUp(){
-        erlangen = new SphericCoordinate(49.583333,  11.016667);
-        munich = new SphericCoordinate(48.137222, 11.575556);
+        erlangen = new SphericCoordinate(ERLANGEN_LAT,  ERLANGEN_LON);
+        munich = new SphericCoordinate(MUNICH_LAT, MUNICH_LON);
     }
 
     @Test
     public void testGetDistanceSpheric(){
         double distance = erlangen.getDistance(munich);
-        assertEquals(167.86, distance, 3.0);
+        assertEquals(DISTANCE_ER_MUN, distance, DISTANCE_TOLERANCE);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -73,7 +84,15 @@ public class SphericCoordinateTest {
 
     @Test
     public void asCartesianCoordinateTest() throws Exception {
+        CartesianCoordinate erlangenCart = erlangen.asCartesianCoordinate();
+        boolean isEqual = erlangen.isEqual(erlangenCart);
+        assertTrue(isEqual);
+    }
 
+    @After
+    public void tearDown(){
+        erlangen = null;
+        munich = null;
     }
 
 }

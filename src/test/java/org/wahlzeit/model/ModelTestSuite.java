@@ -10,7 +10,8 @@ import org.wahlzeit.model.persistence.GcsAdapterTest;
 @RunWith(Suite.class)
 @SuiteClasses({
         AccessRightsTest.class,
-        CoordinateTest.class,
+        SphericCoordinateTest.class,
+        CartesianCoordinateTest.class,
         FlagReasonTest.class,
         GenderTest.class,
         GuestTest.class,

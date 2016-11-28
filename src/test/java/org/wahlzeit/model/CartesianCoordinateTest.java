@@ -1,5 +1,6 @@
 package org.wahlzeit.model;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +24,9 @@ import static org.junit.Assert.*;
  * You should have received a copy of the GNU Affero General Public
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
- */public class CartesianCoordinateTest {
+ */
+
+public class CartesianCoordinateTest {
 
     CartesianCoordinate cartesian1;
     CartesianCoordinate cartesian2;
@@ -64,7 +67,16 @@ import static org.junit.Assert.*;
 
     @Test
     public void asCartesianCoordinate() throws Exception {
+        CartesianCoordinate clone = cartesian1.asCartesianCoordinate();
+        boolean isEqual = cartesian1.isEqual(clone);
+        assertTrue(isEqual);
+    }
 
+    @After
+    public void tearDown(){
+        cartesian1 = null;
+        cartesian2 = null;
+        cartesian3 = null;
     }
 
 }
