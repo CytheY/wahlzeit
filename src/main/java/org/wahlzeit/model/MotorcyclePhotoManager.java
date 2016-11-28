@@ -18,6 +18,10 @@ package org.wahlzeit.model;/*
  * <http://www.gnu.org/licenses/>.
  */
 
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Work;
+import org.wahlzeit.services.LogBuilder;
+
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -26,12 +30,16 @@ public class MotorcyclePhotoManager extends PhotoManager {
     /**
      *
      */
-    protected static final MotorcyclePhotoManager instance = new MotorcyclePhotoManager();
+    static {
+        instance = new MotorcyclePhotoManager();
+    }
 
     private static final Logger log = Logger.getLogger(PhotoManager.class.getName());
-
+    /**
+     * In-memory cache for photos
+     */
     public static MotorcyclePhotoManager getInstance() {
-        return instance;
+        return (MotorcyclePhotoManager) instance;
     }
     /**
      *
@@ -46,5 +54,6 @@ public class MotorcyclePhotoManager extends PhotoManager {
 
         return result;
     }
+
 
 }
