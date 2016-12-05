@@ -24,9 +24,9 @@ import org.wahlzeit.model.interfaces.ICoordinate;
 public class Location {
 
 
-    public ICoordinate coordinate = null;
+    public AbstractCoordinate coordinate = null;
 
-    public Location(ICoordinate coord){
+    public Location(AbstractCoordinate coord){
         this.coordinate = coord;
     }
 }
