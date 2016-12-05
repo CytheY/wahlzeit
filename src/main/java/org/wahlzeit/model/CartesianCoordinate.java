@@ -1,3 +1,4 @@
+package org.wahlzeit.model;
 
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
@@ -18,8 +19,6 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
-package org.wahlzeit.model;
 
 public class CartesianCoordinate extends AbstractCoordinate{
 
@@ -43,8 +42,17 @@ public class CartesianCoordinate extends AbstractCoordinate{
         return z;
     }
 
+
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
+        assertClassInvariants();
         return this;
+    }
+
+    @Override
+    public void assertClassInvariants() {
+        assert x < Double.POSITIVE_INFINITY && x > Double.NEGATIVE_INFINITY && x != Double.NaN;
+        assert y < Double.POSITIVE_INFINITY && y > Double.NEGATIVE_INFINITY && y != Double.NaN;
+        assert z < Double.POSITIVE_INFINITY && z > Double.NEGATIVE_INFINITY && z != Double.NaN;
     }
 }
