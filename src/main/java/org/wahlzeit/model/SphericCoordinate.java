@@ -1,3 +1,4 @@
+package org.wahlzeit.model;
 /*
  * Copyright (c) 2006-2009 by Julian Schneider, http://dirkriehle.com
  *
@@ -17,9 +18,10 @@
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-package org.wahlzeit.model;
 
 public class SphericCoordinate extends AbstractCoordinate{
+
+    private static final int EARTH_RADIUS = 6371;
 
     private static final double LATITUDE_MIN = -90.0;
     private static final double LATITUDE_MAX = 90.0;
@@ -52,6 +54,8 @@ public class SphericCoordinate extends AbstractCoordinate{
 
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
+        assertClassInvariants();
+
         double lat, lon;
         double x, y, z;
 
@@ -62,6 +66,15 @@ public class SphericCoordinate extends AbstractCoordinate{
         y = EARTH_RADIUS * Math.cos(lat) * Math.sin(lon);
         z = EARTH_RADIUS * Math.sin(lat);
 
-        return new CartesianCoordinate(x, y, z);
+        CartesianCoordinate result = new CartesianCoordinate(x, y, z);
+        result.assertClassInvariants();
+
+        return result;
+    }
+
+    @Override
+    public void assertClassInvariants() {
+        assert latitude >= LATITUDE_MIN && longitude <= LATITUDE_MAX;
+        assert longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX;
     }
 }
