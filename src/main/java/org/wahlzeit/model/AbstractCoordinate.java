@@ -1,4 +1,5 @@
-package org.wahlzeit.model;/*
+package org.wahlzeit.model;
+/*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.
@@ -22,14 +23,25 @@ import org.wahlzeit.model.interfaces.ICoordinate;
 
 public abstract class AbstractCoordinate implements ICoordinate{
 
-    protected static int EARTH_RADIUS = 6371;
-
     //Tolerance in which two coordinates are equal
-    private static int TOLERANCE = 0;
+    private static double TOLERANCE = 0.5;
+
+    protected abstract void assertClassInvariants();
+
+    protected void assertIsNonNullArgument(ICoordinate coord){
+        assert coord != null;
+    }
 
 
-    @Override
     public double getDistance(ICoordinate coord){
+        assertIsNonNullArgument(coord);
+        assertClassInvariants();
+
+        return doGetDistance(coord);
+    }
+
+
+    public double doGetDistance(ICoordinate coord){
         double delta_x, delta_y, delta_z;
 
         CartesianCoordinate cc1 = coord.asCartesianCoordinate();
@@ -46,18 +58,19 @@ public abstract class AbstractCoordinate implements ICoordinate{
                                      delta_z * delta_z);
 
         return distance;
-    };
+    }
 
     @Override
     public boolean isEqual(ICoordinate coord){
+        assertIsNonNullArgument(coord);
+        assertClassInvariants();
+
         CartesianCoordinate cc1 = coord.asCartesianCoordinate();
         CartesianCoordinate cc2 = this.asCartesianCoordinate();
 
         return cc1.getDistance(cc2) <= TOLERANCE;
-    };
+    }
 
     @Override
     public abstract CartesianCoordinate asCartesianCoordinate();
-
-
 }

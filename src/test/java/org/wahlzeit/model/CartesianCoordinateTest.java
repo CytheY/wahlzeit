@@ -49,7 +49,7 @@ public class CartesianCoordinateTest {
     public void getDistanceSameCoordTest(){
 
         double distance = cartesian1.getDistance(cartesian3);
-        assertEquals(distance, 0, 0.0);
+        assertEquals(0, distance, 0.0);
     }
 
     @Test

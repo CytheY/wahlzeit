@@ -1,4 +1,5 @@
-package org.wahlzeit.model.interfaces;/*
+package org.wahlzeit.model.interfaces;
+/*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.

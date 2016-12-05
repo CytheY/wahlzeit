@@ -21,15 +21,12 @@ package org.wahlzeit.model;
 
 import org.wahlzeit.model.interfaces.ICoordinate;
 
-/**
- * Created by cyrus on 24.10.16.
- */
 public class Location {
 
 
-    public SphericCoordinate coordinate = null;
+    public ICoordinate coordinate = null;
 
-    public Location(double lat, double lng){
-        this.coordinate = new SphericCoordinate(lat,lng);
+    public Location(ICoordinate coord){
+        this.coordinate = coord;
     }
 }

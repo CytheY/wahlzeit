@@ -3,11 +3,8 @@ package org.wahlzeit.model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-/**
- * Created by cyrus on 24.10.16.
- */
 public class LocationTest {
 
     private Location location1;
@@ -15,17 +12,20 @@ public class LocationTest {
 
     @Before
     public void setUp(){
-        location1 = new Location(1.0, 1.0);
-        location2 = new Location(0.0, 0.0);
+        location1 = new Location(new SphericCoordinate(1.0, 1.0));
+        location2 = new Location(new SphericCoordinate(0.0, 0.0));
     }
 
     @Test
     public void testLocation(){
-        assertEquals(location1.coordinate.getLongitude(), 1.0, 0.0);
-        assertEquals(location1.coordinate.getLatitude(), 1.0, 0.0);
+        assertTrue( location1 != null);
+        assertTrue( location2 != null);
+    }
 
-        assertEquals(location2.coordinate.getLongitude(), 0.0, 0.0);
-        assertEquals(location2.coordinate.getLatitude(), 0.0, 0.0);
+    @After
+    public void tearDown(){
+        location1 = null;
+        location2 = null;
     }
 
 }
