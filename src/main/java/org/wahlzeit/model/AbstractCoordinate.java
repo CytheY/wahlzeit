@@ -33,6 +33,11 @@ public abstract class AbstractCoordinate implements ICoordinate{
     }
 
 
+    /**
+     *
+     * @param coord
+     * @return double: distance between two coordinates in meters
+     */
     public double getDistance(ICoordinate coord){
         assertIsNonNullArgument(coord);
         assertClassInvariants();
@@ -41,7 +46,7 @@ public abstract class AbstractCoordinate implements ICoordinate{
     }
 
 
-    public double doGetDistance(ICoordinate coord){
+    private double doGetDistance(ICoordinate coord){
         double delta_x, delta_y, delta_z;
 
         CartesianCoordinate cc1 = coord.asCartesianCoordinate();
@@ -56,10 +61,14 @@ public abstract class AbstractCoordinate implements ICoordinate{
         double distance =  Math.sqrt(delta_x * delta_x +
                                      delta_y * delta_y +
                                      delta_z * delta_z);
-
         return distance;
     }
 
+    /**
+     *
+     * @param coord
+     * @return bool: two coordinates describe the same location
+     */
     @Override
     public boolean isEqual(ICoordinate coord){
         assertIsNonNullArgument(coord);

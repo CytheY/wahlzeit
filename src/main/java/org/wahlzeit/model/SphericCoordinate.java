@@ -1,6 +1,6 @@
 package org.wahlzeit.model;
 /*
- * Copyright (c) 2006-2009 by Julian Schneider, http://dirkriehle.com
+ * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
  * This file is part of the Wahlzeit photo rating application.
  *
@@ -32,8 +32,14 @@ public class SphericCoordinate extends AbstractCoordinate{
     private double latitude;
     private double longitude;
 
+    /**
+     *
+     * @param lat latitude
+     * @param lng longitude
+     * @throws IllegalArgumentException
+     */
 
-    public SphericCoordinate(double lat, double lng){
+    public SphericCoordinate(double lat, double lng) {
         if(lat < LATITUDE_MIN || lat > LATITUDE_MAX)
             throw new IllegalArgumentException("Latitude value is invalid. Must be between -90.0 and 90.0");
 
@@ -42,16 +48,30 @@ public class SphericCoordinate extends AbstractCoordinate{
 
         this.latitude = lat;
         this.longitude = lng;
+
+        assertClassInvariants();
     }
 
+    /**
+     * @methodtype get
+     * @return latitude coordiante as double
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * @methodtype get
+     * @return longitude coordinate as double
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * @methodtype helper
+     * @return object as CartesianCoordinate
+     */
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         assertClassInvariants();
@@ -72,8 +92,12 @@ public class SphericCoordinate extends AbstractCoordinate{
         return result;
     }
 
+    /**
+     * @methodtype assertion
+     * @return void
+     */
     @Override
-    public void assertClassInvariants() {
+    protected void assertClassInvariants() {
         assert latitude >= LATITUDE_MIN && longitude <= LATITUDE_MAX;
         assert longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX;
     }

@@ -22,7 +22,23 @@ package org.wahlzeit.model.interfaces;
 import org.wahlzeit.model.CartesianCoordinate;
 
 public interface ICoordinate {
+    /**
+     * @methodtype get
+     * @param coord
+     * @return distance in meter as double
+     */
     public double getDistance(ICoordinate coord);
+
+    /**
+     * @methodtype
+     * @param coord
+     * @return
+     */
     public boolean isEqual(ICoordinate coord);
+
+    /**
+     *
+     * @return
+     */
     public CartesianCoordinate asCartesianCoordinate();
 }

@@ -24,33 +24,59 @@ public class CartesianCoordinate extends AbstractCoordinate{
 
     private double x, y, z;
 
+    /**
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @param z z-coordinate
+     */
     public CartesianCoordinate(double x, double y, double z){
         this.x = x;
         this.y = y;
         this.z = z;
+        assertClassInvariants();
     }
 
+    /**
+     * @methodtype get
+     * @return x-coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * @methodtype get
+     * @return y-coordinate
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     * @methodtype get
+     * @return z-coordinate
+     */
     public double getZ() {
         return z;
     }
 
-
+    /**
+     * @methodtype helper
+     * @return object as CartesianCoordinate (this)
+     */
     @Override
     public CartesianCoordinate asCartesianCoordinate() {
         assertClassInvariants();
         return this;
     }
 
+    /**
+     * @methodtype assertion
+     * @return void
+     */
     @Override
-    public void assertClassInvariants() {
+    protected void assertClassInvariants() {
         assert x < Double.POSITIVE_INFINITY && x > Double.NEGATIVE_INFINITY && x != Double.NaN;
         assert y < Double.POSITIVE_INFINITY && y > Double.NEGATIVE_INFINITY && y != Double.NaN;
         assert z < Double.POSITIVE_INFINITY && z > Double.NEGATIVE_INFINITY && z != Double.NaN;
