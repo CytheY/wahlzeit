@@ -28,8 +28,9 @@ public abstract class AbstractCoordinate implements ICoordinate{
 
     protected abstract void assertClassInvariants();
 
-    protected void assertIsNonNullArgument(ICoordinate coord){
-        assert coord != null;
+    protected void assertIsNonNullArgument(ICoordinate coord) throws NullPointerException {
+        if(coord == null)
+            throw new NullPointerException();
     }
 
 

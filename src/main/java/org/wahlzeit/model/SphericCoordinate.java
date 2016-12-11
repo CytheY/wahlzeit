@@ -39,12 +39,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @throws IllegalArgumentException
      */
 
-    public SphericCoordinate(double lat, double lng) {
-        if(lat < LATITUDE_MIN || lat > LATITUDE_MAX)
-            throw new IllegalArgumentException("Latitude value is invalid. Must be between -90.0 and 90.0");
-
-        if(lng < LONGITUDE_MIN || lng > LONGITUDE_MAX)
-            throw new IllegalArgumentException("Longitude value is invalid. Must be between -180.0 and 180.0");
+    public SphericCoordinate(double lat, double lng) throws IllegalArgumentException {
 
         this.latitude = lat;
         this.longitude = lng;
@@ -73,7 +68,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @return object as CartesianCoordinate
      */
     @Override
-    public CartesianCoordinate asCartesianCoordinate() {
+    public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
         assertClassInvariants();
 
         double lat, lon;
@@ -97,8 +92,11 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @return void
      */
     @Override
-    protected void assertClassInvariants() {
-        assert latitude >= LATITUDE_MIN && longitude <= LATITUDE_MAX;
-        assert longitude >= LONGITUDE_MIN && longitude <= LONGITUDE_MAX;
+    protected void assertClassInvariants() throws IllegalArgumentException{
+        if(latitude < LATITUDE_MIN || latitude > LATITUDE_MAX)
+            throw new IllegalArgumentException("Latitude value is invalid. Must be between -90.0 and 90.0");
+
+        if(longitude < LONGITUDE_MIN || longitude > LONGITUDE_MAX)
+            throw new IllegalArgumentException("Longitude value is invalid. Must be between -180.0 and 180.0");
     }
 }

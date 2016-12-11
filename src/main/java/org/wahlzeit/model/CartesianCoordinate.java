@@ -20,6 +20,8 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import java.util.IllegalFormatCodePointException;
+
 public class CartesianCoordinate extends AbstractCoordinate{
 
     private double x, y, z;
@@ -30,7 +32,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
      * @param y y-coordinate
      * @param z z-coordinate
      */
-    public CartesianCoordinate(double x, double y, double z){
+    public CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException{
         this.x = x;
         this.y = y;
         this.z = z;
@@ -66,7 +68,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
      * @return object as CartesianCoordinate (this)
      */
     @Override
-    public CartesianCoordinate asCartesianCoordinate() {
+    public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
         assertClassInvariants();
         return this;
     }
@@ -76,9 +78,15 @@ public class CartesianCoordinate extends AbstractCoordinate{
      * @return void
      */
     @Override
-    protected void assertClassInvariants() {
-        assert x < Double.POSITIVE_INFINITY && x > Double.NEGATIVE_INFINITY && x != Double.NaN;
-        assert y < Double.POSITIVE_INFINITY && y > Double.NEGATIVE_INFINITY && y != Double.NaN;
-        assert z < Double.POSITIVE_INFINITY && z > Double.NEGATIVE_INFINITY && z != Double.NaN;
+    protected void assertClassInvariants() throws IllegalArgumentException{
+        if(x < Double.POSITIVE_INFINITY || x > Double.NEGATIVE_INFINITY || x != Double.NaN){
+            throw new IllegalArgumentException("X is not a valid double value.");
+        }
+        if(y < Double.POSITIVE_INFINITY || y > Double.NEGATIVE_INFINITY || y != Double.NaN){
+            throw new IllegalArgumentException("Y is not a valid double value.");
+        }
+        if(z < Double.POSITIVE_INFINITY || z > Double.NEGATIVE_INFINITY || z != Double.NaN){
+            throw new IllegalArgumentException("Z is not a valid double value.");
+        }
     }
 }
