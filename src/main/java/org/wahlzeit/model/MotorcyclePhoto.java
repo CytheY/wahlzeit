@@ -23,6 +23,8 @@ package org.wahlzeit.model;
 
 import com.googlecode.objectify.annotation.Entity;
 
+import java.util.Calendar;
+
 @Entity
 public class MotorcyclePhoto extends Photo{
 
@@ -36,7 +38,8 @@ public class MotorcyclePhoto extends Photo{
         CROSS,
         STREETFIGHTER,
         OTHER
-        }
+    }
+
     public Type type;
 
     private final static String NA = "N/A";
@@ -49,7 +52,6 @@ public class MotorcyclePhoto extends Photo{
 
     public MotorcyclePhoto(){
         super();
-
     }
 
     /**
@@ -61,7 +63,7 @@ public class MotorcyclePhoto extends Photo{
 
 
     /**
-     *
+     * @methodtype constructor
      */
     public MotorcyclePhoto(PhotoId myId, String brand, String model, int buildYear, Type type) {
         super(myId);
@@ -69,41 +71,104 @@ public class MotorcyclePhoto extends Photo{
         this.model = model;
         this.buildYear = buildYear;
         this.type = type;
+
+        assertClassInvariants();
     }
 
+    private void assertClassInvariants() {
+        assertString(brand);
+        assertString(model);
+        assertBuildYear();
+    }
+
+    private void assertString(String brand) {
+        if(model.isEmpty())
+            throw new IllegalArgumentException("Model name must not be emopty.");
+    }
+
+    private void assertBuildYear() {
+        Calendar cal = Calendar.getInstance();
+
+        if(buildYear < 1800 || buildYear > cal.YEAR){
+            throw new IllegalArgumentException("Buildyear have to be between 1800 and " + cal.YEAR);
+        }
+    }
+
+    /**
+     * @methodtype get
+     * @return Type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * @methodtype set
+     * @param type
+     */
     public void setType(Type type) {
         this.type = type;
     }
 
+    /**
+     * @methodtype get
+     * @return String: brand
+     */
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    /**
+     *
+     * @param brand
+     * @throws IllegalArgumentException
+     */
+    public void setBrand(String brand) throws IllegalArgumentException {
+        assertString(brand);
         this.brand = brand;
     }
 
+    /**
+     * @methodtype get
+     * @return String: model
+     */
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    /**
+     * @methodtype set
+     * @param model
+     * @throws IllegalArgumentException
+     */
+    public void setModel(String model) throws IllegalArgumentException {
+        assertString(model);
         this.model = model;
     }
 
+    /**
+     * @methodtype get
+     * @return String: Name as <brand model (buildYear)>
+     */
     public String getName() {
-        return brand + " " + model + "(" + buildYear + ")";
+        return getBrand() + " " + getModel() + "(" + getBuildYear() + ")";
     }
 
+    /**
+     * @methodtype get
+     * @return Int: buildYear
+     */
     public int getBuildYear() {
         return buildYear;
     }
 
-    public void setBuildYear(int buildYear) {
+    /**
+     * @methodtype set
+     * @param buildYear
+     * @throws IllegalArgumentException
+     */
+    public void setBuildYear(int buildYear) throws IllegalArgumentException {
+        assertBuildYear();
         this.buildYear = buildYear;
     }
 }

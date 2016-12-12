@@ -20,8 +20,6 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import java.util.IllegalFormatCodePointException;
-
 public class CartesianCoordinate extends AbstractCoordinate{
 
     private double x, y, z;
@@ -64,17 +62,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
     }
 
     /**
-     * @methodtype helper
-     * @return object as CartesianCoordinate (this)
-     */
-    @Override
-    public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
-        assertClassInvariants();
-        return this;
-    }
-
-    /**
-     * @methodtype assertion
+     * @methodtype assertion(AbstractCoordinate)
      * @return void
      */
     @Override

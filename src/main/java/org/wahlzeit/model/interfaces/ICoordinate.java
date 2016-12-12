@@ -35,10 +35,4 @@ public interface ICoordinate {
      * @return
      */
     public boolean isEqual(ICoordinate coord);
-
-    /**
-     *
-     * @return
-     */
-    public CartesianCoordinate asCartesianCoordinate();
 }

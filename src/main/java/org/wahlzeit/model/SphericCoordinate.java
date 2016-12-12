@@ -38,7 +38,6 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @param lng longitude
      * @throws IllegalArgumentException
      */
-
     public SphericCoordinate(double lat, double lng) throws IllegalArgumentException {
 
         this.latitude = lat;
@@ -65,26 +64,29 @@ public class SphericCoordinate extends AbstractCoordinate{
 
     /**
      * @methodtype helper
-     * @return object as CartesianCoordinate
+     * @return object coordinates as CartesianCoordinate x
      */
     @Override
-    public CartesianCoordinate asCartesianCoordinate() throws IllegalArgumentException {
-        assertClassInvariants();
+    protected double getX(){
+        return EARTH_RADIUS * Math.cos(latitude) * Math.cos(longitude);
+    }
 
-        double lat, lon;
-        double x, y, z;
+    /**
+     * @methodtype helper
+     * @return object coordinates as CartesianCoordinate y
+     */
+    @Override
+    protected double getY(){
+        return EARTH_RADIUS * Math.cos(latitude) * Math.sin(longitude);
+    }
 
-        lat = Math.toRadians(latitude);
-        lon = Math.toRadians(longitude);
-
-        x = EARTH_RADIUS * Math.cos(lat) * Math.cos(lon);
-        y = EARTH_RADIUS * Math.cos(lat) * Math.sin(lon);
-        z = EARTH_RADIUS * Math.sin(lat);
-
-        CartesianCoordinate result = new CartesianCoordinate(x, y, z);
-        result.assertClassInvariants();
-
-        return result;
+    /**
+     * @methodtype helper
+     * @return object coordinates as CartesianCoordinate z
+     */
+    @Override
+    protected double getZ(){
+        return EARTH_RADIUS * Math.sin(latitude);
     }
 
     /**

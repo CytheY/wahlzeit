@@ -28,11 +28,14 @@ public abstract class AbstractCoordinate implements ICoordinate{
 
     protected abstract void assertClassInvariants();
 
+    protected abstract double getX();
+    protected abstract double getY();
+    protected abstract double getZ();
+
     protected void assertIsNonNullArgument(ICoordinate coord) throws NullPointerException {
         if(coord == null)
             throw new NullPointerException();
     }
-
 
     /**
      *
@@ -43,19 +46,15 @@ public abstract class AbstractCoordinate implements ICoordinate{
         assertIsNonNullArgument(coord);
         assertClassInvariants();
 
-        return doGetDistance(coord);
+        return doGetDistance((AbstractCoordinate) coord);
     }
 
-
-    private double doGetDistance(ICoordinate coord){
+    private double doGetDistance(AbstractCoordinate coord){
         double delta_x, delta_y, delta_z;
 
-        CartesianCoordinate cc1 = coord.asCartesianCoordinate();
-        CartesianCoordinate cc2 = this.asCartesianCoordinate();
-
-        delta_x = cc2.getX() - cc1.getX();
-        delta_y = cc2.getY() - cc1.getY();
-        delta_z = cc2.getZ() - cc1.getZ();
+        delta_x = this.getX() - coord.getX();
+        delta_y = this.getY() - coord.getY();
+        delta_z = this.getZ() - coord.getZ();
 
 
         // distance between points (x1,y1,z1) and (x2,y2,z2)
@@ -66,7 +65,7 @@ public abstract class AbstractCoordinate implements ICoordinate{
     }
 
     /**
-     *
+     * @methodtype helper
      * @param coord
      * @return bool: two coordinates describe the same location
      */
@@ -75,12 +74,6 @@ public abstract class AbstractCoordinate implements ICoordinate{
         assertIsNonNullArgument(coord);
         assertClassInvariants();
 
-        CartesianCoordinate cc1 = coord.asCartesianCoordinate();
-        CartesianCoordinate cc2 = this.asCartesianCoordinate();
-
-        return cc1.getDistance(cc2) <= TOLERANCE;
+        return this.getDistance(coord) <= TOLERANCE;
     }
-
-    @Override
-    public abstract CartesianCoordinate asCartesianCoordinate();
 }
