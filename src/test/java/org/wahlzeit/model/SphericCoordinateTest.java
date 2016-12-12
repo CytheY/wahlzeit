@@ -3,7 +3,6 @@ package org.wahlzeit.model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.wahlzeit.model.interfaces.ICoordinate;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package org.wahlzeit.model.interfaces;
+package org.wahlzeit.model;
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
  *
@@ -19,20 +19,18 @@ package org.wahlzeit.model.interfaces;
  * <http://www.gnu.org/licenses/>.
  */
 
-import org.wahlzeit.model.CartesianCoordinate;
-
-public interface ICoordinate {
+public interface Coordinate {
     /**
      * @methodtype get
      * @param coord
      * @return distance in meter as double
      */
-    public double getDistance(ICoordinate coord);
+    public double getDistance(Coordinate coord);
 
     /**
      * @methodtype
      * @param coord
      * @return
      */
-    public boolean isEqual(ICoordinate coord);
+    public boolean isEqual(Coordinate coord);
 }

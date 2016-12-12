@@ -19,9 +19,7 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import org.wahlzeit.model.interfaces.ICoordinate;
-
-public abstract class AbstractCoordinate implements ICoordinate{
+public abstract class AbstractCoordinate implements Coordinate {
 
     //Tolerance in which two coordinates are equal
     private static double TOLERANCE = 0.5;
@@ -32,7 +30,7 @@ public abstract class AbstractCoordinate implements ICoordinate{
     protected abstract double getY();
     protected abstract double getZ();
 
-    protected void assertIsNonNullArgument(ICoordinate coord) throws NullPointerException {
+    protected void assertIsNonNullArgument(Coordinate coord) throws NullPointerException {
         if(coord == null)
             throw new NullPointerException();
     }
@@ -42,7 +40,7 @@ public abstract class AbstractCoordinate implements ICoordinate{
      * @param coord
      * @return double: distance between two coordinates in meters
      */
-    public double getDistance(ICoordinate coord){
+    public double getDistance(Coordinate coord){
         assertIsNonNullArgument(coord);
         assertClassInvariants();
 
@@ -70,7 +68,7 @@ public abstract class AbstractCoordinate implements ICoordinate{
      * @return bool: two coordinates describe the same location
      */
     @Override
-    public boolean isEqual(ICoordinate coord){
+    public boolean isEqual(Coordinate coord){
         assertIsNonNullArgument(coord);
         assertClassInvariants();
 
