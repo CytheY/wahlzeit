@@ -19,7 +19,11 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import java.util.HashMap;
+
 public class SphericCoordinate extends AbstractCoordinate{
+
+    private static final HashMap<Integer, SphericCoordinate> sphericCoordinateMap = new HashMap<>();
 
     private static final int EARTH_RADIUS = 6371;
 
@@ -29,8 +33,8 @@ public class SphericCoordinate extends AbstractCoordinate{
     private static final double LONGITUDE_MIN = -180.0;
     private static final double LONGITUDE_MAX = 180.0;
 
-    private double latitude;
-    private double longitude;
+    private final double latitude;
+    private final double longitude;
 
     /**
      *
@@ -46,6 +50,18 @@ public class SphericCoordinate extends AbstractCoordinate{
         assertClassInvariants();
     }
 
+    public static Coordinate getCoordinate(double lat, double lng){
+        SphericCoordinate tmp = new SphericCoordinate(lat,lng);
+        synchronized (sphericCoordinateMap) {
+            //check value object if already in HashMap
+            SphericCoordinate result = sphericCoordinateMap.get(tmp.hashCode());
+            if (result == null) {
+                result = tmp;
+                sphericCoordinateMap.put(tmp.hashCode(), result);
+            }
+            return  result;
+        }
+    }
     /**
      * @methodtype get
      * @return latitude coordiante as double
@@ -68,7 +84,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      */
     @Override
     protected double getX(){
-        return EARTH_RADIUS * Math.cos(latitude) * Math.cos(longitude);
+        return EARTH_RADIUS * Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(longitude));
     }
 
     /**
@@ -77,7 +93,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      */
     @Override
     protected double getY(){
-        return EARTH_RADIUS * Math.cos(latitude) * Math.sin(longitude);
+        return EARTH_RADIUS * Math.cos(Math.toRadians(latitude)) * Math.sin(Math.toRadians(longitude));
     }
 
     /**
@@ -86,7 +102,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      */
     @Override
     protected double getZ(){
-        return EARTH_RADIUS * Math.sin(latitude);
+        return EARTH_RADIUS * Math.sin(Math.toRadians(latitude));
     }
 
     /**

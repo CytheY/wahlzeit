@@ -28,21 +28,29 @@ import static org.junit.Assert.*;
 
 public class CartesianCoordinateTest {
 
+    final double X_1 = 156.0;
+    final double Y_1 = 2.0;
+    final double Z_1 = 34.0;
+
+    final double X_2 = 422.002432;
+    final double Y_2 = 123.009093;
+    final double Z_2 = -324.000942;
+
     CartesianCoordinate cartesian1;
     CartesianCoordinate cartesian2;
     CartesianCoordinate cartesian3;
 
     @Before
     public void setUp(){
-        cartesian1 = new CartesianCoordinate(0,0,0);
-        cartesian2 = new CartesianCoordinate(100, 100, 100);
-        cartesian3 = new CartesianCoordinate(0,0,0);
+        cartesian1 = new CartesianCoordinate(X_1,Y_1,Z_1);
+        cartesian2 = new CartesianCoordinate(X_2, Y_2, Z_2);
+        cartesian3 = new CartesianCoordinate(X_1,Y_1,Z_1);
     }
 
     @Test
     public void testGetDistanceCartesian(){
         double distance = cartesian1.getDistance(cartesian2);
-        assertEquals(173.21, distance, 0.1);
+        assertEquals(462.13, distance, 0.1);
     }
 
     @Test
@@ -66,10 +74,33 @@ public class CartesianCoordinateTest {
 
 
     @Test
-    public void asCartesianCoordinate() throws Exception {
-        CartesianCoordinate clone = cartesian1.asCartesianCoordinate();
+    public void asCartesianCoordinate() {
+        CartesianCoordinate clone = new CartesianCoordinate(cartesian1.getX(), cartesian1.getY(), cartesian1.getZ());
         boolean isEqual = cartesian1.isEqual(clone);
         assertTrue(isEqual);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void invalidCoordinates() {
+        CartesianCoordinate clone = new CartesianCoordinate(Double.NaN, 1, cartesian1.getZ());
+    }
+
+    @Test
+    public void testEquals(){
+        assertTrue(cartesian1.equals(cartesian3));
+        assertFalse(cartesian1.equals(cartesian2));
+    }
+
+    @Test
+    public void testCartesianValueObject(){
+        double x = 156.0;
+        double y = 2.0;
+        double z = 34.0;
+
+        CartesianCoordinate test = new CartesianCoordinate(x,y,z);
+        Coordinate valueObject = CartesianCoordinate.getCoordinate(x,y,z);
+
+        assertTrue(test.equals(valueObject));
     }
 
     @After

@@ -19,6 +19,8 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import java.util.Objects;
+
 public abstract class AbstractCoordinate implements Coordinate {
 
     //Tolerance in which two coordinates are equal
@@ -60,6 +62,26 @@ public abstract class AbstractCoordinate implements Coordinate {
                                      delta_y * delta_y +
                                      delta_z * delta_z);
         return distance;
+    }
+
+    /**
+     * implement java.lang.Object equality contract hashCode Method
+     * @return
+     */
+    public int hashCode(){
+        return Objects.hash(this.getX(), this.getY(), this.getZ());
+    }
+
+    /**
+     * implement java.lang.Object equality contract equals Method
+     * @param o
+     * @return
+     */
+    public boolean equals(Object o){
+        if((o == null) || !(o instanceof AbstractCoordinate))
+            return false;
+
+        return this.isEqual((AbstractCoordinate) o);
     }
 
     /**

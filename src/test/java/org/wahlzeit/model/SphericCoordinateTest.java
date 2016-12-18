@@ -83,11 +83,30 @@ public class SphericCoordinateTest {
 
     @Test
     public void asCartesianCoordinateTest() throws Exception {
-        CartesianCoordinate erlangenCart = erlangen.asCartesianCoordinate();
+        CartesianCoordinate erlangenCart = new CartesianCoordinate(erlangen.getX(), erlangen.getY(), erlangen.getZ());
         boolean isEqual = erlangen.isEqual(erlangenCart);
         assertTrue(isEqual);
     }
 
+    @Test
+    public void testEquals(){
+
+        SphericCoordinate test1 = new SphericCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
+        SphericCoordinate test2 = new SphericCoordinate(ERLANGEN_LAT, ERLANGEN_LON);
+        SphericCoordinate test3 = new SphericCoordinate(MUNICH_LAT, MUNICH_LON);
+
+        assertTrue(test1.equals(test2));
+        assertFalse(test1.equals(test3));
+    }
+
+    @Test
+    public void testSphericValueObject(){
+
+        SphericCoordinate test = new SphericCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
+        Coordinate valueObject = SphericCoordinate.getCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
+
+        assertTrue(test.equals(valueObject));
+    }
     @After
     public void tearDown(){
         erlangen = null;

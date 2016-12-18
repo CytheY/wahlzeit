@@ -20,9 +20,13 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import java.util.HashMap;
+
 public class CartesianCoordinate extends AbstractCoordinate{
 
-    private double x, y, z;
+    private static final HashMap<Integer, CartesianCoordinate> cartCoordinateMap = new HashMap<>();
+
+    private final double x, y, z;
 
     /**
      *
@@ -35,6 +39,19 @@ public class CartesianCoordinate extends AbstractCoordinate{
         this.y = y;
         this.z = z;
         assertClassInvariants();
+    }
+
+    public static Coordinate getCoordinate(double x, double y, double z){
+        CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
+        synchronized (cartCoordinateMap) {
+            //check value object if already in HashMap
+            CartesianCoordinate result = cartCoordinateMap.get(tmp.hashCode());
+            if (result == null) {
+                result = tmp;
+                cartCoordinateMap.put(tmp.hashCode(), result);
+            }
+            return  result;
+        }
     }
 
     /**
@@ -67,13 +84,13 @@ public class CartesianCoordinate extends AbstractCoordinate{
      */
     @Override
     protected void assertClassInvariants() throws IllegalArgumentException{
-        if(x < Double.POSITIVE_INFINITY || x > Double.NEGATIVE_INFINITY || x != Double.NaN){
+        if(x == Double.POSITIVE_INFINITY || x == Double.NEGATIVE_INFINITY || x != x){
             throw new IllegalArgumentException("X is not a valid double value.");
         }
-        if(y < Double.POSITIVE_INFINITY || y > Double.NEGATIVE_INFINITY || y != Double.NaN){
+        if(y == Double.POSITIVE_INFINITY || y == Double.NEGATIVE_INFINITY || y != y){
             throw new IllegalArgumentException("Y is not a valid double value.");
         }
-        if(z < Double.POSITIVE_INFINITY || z > Double.NEGATIVE_INFINITY || z != Double.NaN){
+        if(z == Double.POSITIVE_INFINITY || z == Double.NEGATIVE_INFINITY || z != z){
             throw new IllegalArgumentException("Z is not a valid double value.");
         }
     }
