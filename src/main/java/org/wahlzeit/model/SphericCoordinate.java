@@ -42,7 +42,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @param lng longitude
      * @throws IllegalArgumentException
      */
-    public SphericCoordinate(double lat, double lng) throws IllegalArgumentException {
+    private SphericCoordinate(double lat, double lng) throws IllegalArgumentException {
 
         this.latitude = lat;
         this.longitude = lng;
@@ -50,10 +50,17 @@ public class SphericCoordinate extends AbstractCoordinate{
         assertClassInvariants();
     }
 
+    /**
+     * returns an equal object from hashMap or
+     * creates a new instance of CartesianCoordinate if no equal object is found
+     * @param lat
+     * @param lng
+     * @return
+     */
     public static Coordinate getCoordinate(double lat, double lng){
         SphericCoordinate tmp = new SphericCoordinate(lat,lng);
         synchronized (sphericCoordinateMap) {
-            //check value object if already in HashMap
+            //check if object already in HashMap
             SphericCoordinate result = sphericCoordinateMap.get(tmp.hashCode());
             if (result == null) {
                 result = tmp;

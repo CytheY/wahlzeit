@@ -34,17 +34,25 @@ public class CartesianCoordinate extends AbstractCoordinate{
      * @param y y-coordinate
      * @param z z-coordinate
      */
-    public CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException{
+    private CartesianCoordinate(double x, double y, double z) throws IllegalArgumentException{
         this.x = x;
         this.y = y;
         this.z = z;
         assertClassInvariants();
     }
 
+    /**
+     * returns an equal object from hashMap or
+     * creates a new instance of CartesianCoordinate if no equal object is found
+     * @param x
+     * @param y
+     * @param z
+     * @return an instance of CartesianCoordinate
+     */
     public static Coordinate getCoordinate(double x, double y, double z){
         CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
         synchronized (cartCoordinateMap) {
-            //check value object if already in HashMap
+            //check if object already in HashMap
             CartesianCoordinate result = cartCoordinateMap.get(tmp.hashCode());
             if (result == null) {
                 result = tmp;
