@@ -57,7 +57,7 @@ public class SphericCoordinate extends AbstractCoordinate{
      * @param lng
      * @return
      */
-    public static Coordinate getCoordinate(double lat, double lng){
+    public static SphericCoordinate getCoordinate(double lat, double lng){
         SphericCoordinate tmp = new SphericCoordinate(lat,lng);
         synchronized (sphericCoordinateMap) {
             //check if object already in HashMap

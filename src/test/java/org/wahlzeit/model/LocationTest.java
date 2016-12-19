@@ -12,8 +12,8 @@ public class LocationTest {
 
     @Before
     public void setUp(){
-        location1 = new Location(new SphericCoordinate(1.0, 1.0));
-        location2 = new Location(new SphericCoordinate(0.0, 0.0));
+        location1 = new Location(SphericCoordinate.getCoordinate(1.0, 1.0));
+        location2 = new Location(SphericCoordinate.getCoordinate(0.0, 0.0));
     }
 
     @Test

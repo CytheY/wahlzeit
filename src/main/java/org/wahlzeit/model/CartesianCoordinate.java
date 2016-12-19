@@ -49,7 +49,7 @@ public class CartesianCoordinate extends AbstractCoordinate{
      * @param z
      * @return an instance of CartesianCoordinate
      */
-    public static Coordinate getCoordinate(double x, double y, double z){
+    public static CartesianCoordinate getCoordinate(double x, double y, double z){
         CartesianCoordinate tmp = new CartesianCoordinate(x,y,z);
         synchronized (cartCoordinateMap) {
             //check if object already in HashMap

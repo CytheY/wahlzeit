@@ -43,8 +43,8 @@ public class SphericCoordinateTest {
 
     @Before
     public void setUp(){
-        erlangen = new SphericCoordinate(ERLANGEN_LAT,  ERLANGEN_LON);
-        munich = new SphericCoordinate(MUNICH_LAT, MUNICH_LON);
+        erlangen = SphericCoordinate.getCoordinate(ERLANGEN_LAT,  ERLANGEN_LON);
+        munich = SphericCoordinate.getCoordinate(MUNICH_LAT, MUNICH_LON);
     }
 
     @Test
@@ -55,12 +55,12 @@ public class SphericCoordinateTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongLatitudeTest() throws Exception {
-        new SphericCoordinate(-100.0, 90.0);
+        SphericCoordinate.getCoordinate(-100.0, 90.0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongLongitudeTest() throws Exception {
-        new SphericCoordinate(-80.0, 190.0);
+        SphericCoordinate.getCoordinate(-80.0, 190.0);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class SphericCoordinateTest {
 
     @Test
     public void asCartesianCoordinateTest() throws Exception {
-        CartesianCoordinate erlangenCart = new CartesianCoordinate(erlangen.getX(), erlangen.getY(), erlangen.getZ());
+        CartesianCoordinate erlangenCart = CartesianCoordinate.getCoordinate(erlangen.getX(), erlangen.getY(), erlangen.getZ());
         boolean isEqual = erlangen.isEqual(erlangenCart);
         assertTrue(isEqual);
     }
@@ -91,9 +91,9 @@ public class SphericCoordinateTest {
     @Test
     public void testEquals(){
 
-        SphericCoordinate test1 = new SphericCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
-        SphericCoordinate test2 = new SphericCoordinate(ERLANGEN_LAT, ERLANGEN_LON);
-        SphericCoordinate test3 = new SphericCoordinate(MUNICH_LAT, MUNICH_LON);
+        Coordinate test1 = SphericCoordinate.getCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
+        Coordinate test2 = SphericCoordinate.getCoordinate(ERLANGEN_LAT, ERLANGEN_LON);
+        Coordinate test3 = SphericCoordinate.getCoordinate(MUNICH_LAT, MUNICH_LON);
 
         assertTrue(test1.equals(test2));
         assertFalse(test1.equals(test3));
@@ -102,7 +102,7 @@ public class SphericCoordinateTest {
     @Test
     public void testSphericValueObject(){
 
-        SphericCoordinate test = new SphericCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
+        Coordinate test = SphericCoordinate.getCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
         Coordinate valueObject = SphericCoordinate.getCoordinate(ERLANGEN_LAT,ERLANGEN_LON);
 
         assertTrue(test.equals(valueObject));

@@ -42,9 +42,9 @@ public class CartesianCoordinateTest {
 
     @Before
     public void setUp(){
-        cartesian1 = new CartesianCoordinate(X_1,Y_1,Z_1);
-        cartesian2 = new CartesianCoordinate(X_2, Y_2, Z_2);
-        cartesian3 = new CartesianCoordinate(X_1,Y_1,Z_1);
+        cartesian1 = CartesianCoordinate.getCoordinate(X_1,Y_1,Z_1);
+        cartesian2 = CartesianCoordinate.getCoordinate(X_2, Y_2, Z_2);
+        cartesian3 = CartesianCoordinate.getCoordinate(X_1,Y_1,Z_1);
     }
 
     @Test
@@ -75,14 +75,14 @@ public class CartesianCoordinateTest {
 
     @Test
     public void asCartesianCoordinate() {
-        CartesianCoordinate clone = new CartesianCoordinate(cartesian1.getX(), cartesian1.getY(), cartesian1.getZ());
+        CartesianCoordinate clone = CartesianCoordinate.getCoordinate(cartesian1.getX(), cartesian1.getY(), cartesian1.getZ());
         boolean isEqual = cartesian1.isEqual(clone);
         assertTrue(isEqual);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidCoordinates() {
-        CartesianCoordinate clone = new CartesianCoordinate(Double.NaN, 1, cartesian1.getZ());
+        CartesianCoordinate clone = CartesianCoordinate.getCoordinate(Double.NaN, 1, cartesian1.getZ());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class CartesianCoordinateTest {
         double y = 2.0;
         double z = 34.0;
 
-        CartesianCoordinate test = new CartesianCoordinate(x,y,z);
+        CartesianCoordinate test = CartesianCoordinate.getCoordinate(x,y,z);
         Coordinate valueObject = CartesianCoordinate.getCoordinate(x,y,z);
 
         assertTrue(test.equals(valueObject));
