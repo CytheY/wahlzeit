@@ -19,9 +19,17 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import org.wahlzeit.services.LogBuilder;
 
+
+import org.wahlzeit.services.LogBuilder;
 import java.util.logging.Logger;
+
+@PatternInstance(
+        patternName = "Abstract Factory",
+        participants = {
+            "PhotoFactory", "MotorcyclePhotoFactory"
+        }
+)
 
 public class MotorcyclePhotoFactory extends PhotoFactory {
 

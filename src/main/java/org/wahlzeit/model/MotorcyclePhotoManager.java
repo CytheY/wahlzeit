@@ -18,12 +18,16 @@ package org.wahlzeit.model;/*
  * <http://www.gnu.org/licenses/>.
  */
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.Work;
-import org.wahlzeit.services.LogBuilder;
 
 import java.util.*;
 import java.util.logging.Logger;
+
+@PatternInstance(
+        patternName = "Singleton",
+        participants = {
+                "PhotoManager", "MotorcyclePhotoManager"
+        }
+)
 
 public class MotorcyclePhotoManager extends PhotoManager {
 
