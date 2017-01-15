@@ -48,7 +48,7 @@ public class MotorcyclePhotoManager extends PhotoManager {
     /**
      *
      */
-    public Set<MotorcyclePhoto> findPhotosByType(MotorcyclePhoto.Type type) {
+    public Set<MotorcyclePhoto> findPhotosByType(MotorcycleType.Type type) {
         Set<MotorcyclePhoto> result = new HashSet<>();
         readObjects(result, MotorcyclePhoto.class, "Type", type);
 
