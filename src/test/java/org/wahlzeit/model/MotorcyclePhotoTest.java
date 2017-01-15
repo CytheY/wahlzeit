@@ -18,9 +18,7 @@ package org.wahlzeit.model;/*
  * <http://www.gnu.org/licenses/>.
  */
 
-import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
@@ -36,21 +34,5 @@ public class MotorcyclePhotoTest {
 
     private MotorcyclePhoto motorcyclePhoto;
 
-    @Before
-    public void initPhotoFilter() {
-        motorcyclePhoto = new MotorcyclePhoto(new PhotoId(2));
-    }
 
-    /**
-     *
-     */
-    @Test
-    public void testGetterSetter() {
-
-        motorcyclePhoto.setType(MotorcyclePhoto.Type.SCRAMBLER);
-        assertEquals(motorcyclePhoto.getType(), MotorcyclePhoto.Type.SCRAMBLER);
-
-//        motorcyclePhoto.setBrand("Yamaha");
-//        assertEquals(motorcyclePhoto.getBrand(), "Yamaha");
-    }
 }

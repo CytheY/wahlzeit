@@ -45,14 +45,13 @@ public class MotorcyclePhotoFactoryTest {
 
     @Test
     public void createPhotoTest(){
+
         MotorcyclePhoto photo1 = factory.createPhoto();
         MotorcyclePhoto photo2 = factory.createPhoto(new PhotoId(3));
-        MotorcyclePhoto photo3 = factory.createPhoto(new PhotoId(4), "Yamaha", "XJ 650", 1982, MotorcyclePhoto.Type.SCRAMBLER);
+        MotorcyclePhoto photo3 = factory.createPhoto(new PhotoId(4), "Yamaha", "XJ 650", 1982, MotorcycleType.Type.SCRAMBLER);
 
         assertEquals(photo2.getId().asInt(), 3);
 
         assertEquals(photo3.getId().asInt(), 4);
-        assertEquals(photo3.getType(), MotorcyclePhoto.Type.SCRAMBLER);
-
     }
 }

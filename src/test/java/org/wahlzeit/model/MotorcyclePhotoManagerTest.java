@@ -49,9 +49,14 @@ public class MotorcyclePhotoManagerTest {
      */
     @Test
     public void doAdd() throws IOException {
-        MotorcyclePhoto photo1 = new MotorcyclePhoto(new PhotoId(2), "Yamaha", "XJ 650", 1982, MotorcyclePhoto.Type.SCRAMBLER);
-        MotorcyclePhoto photo2 = new MotorcyclePhoto(new PhotoId(3), "Yamaha", "XJ 1200", 2002, MotorcyclePhoto.Type.SCRAMBLER);
-        MotorcyclePhoto photo3 = new MotorcyclePhoto(new PhotoId(4), "Triumph", "Speedtriple", 2001, MotorcyclePhoto.Type.NAKED);
+        Motorcycle moto1 = MotorcycleManager.getInstance().createMotorcycle(MotorcycleType.Type.SCRAMBLER, "Yamaha", "XJ 650", 1982);
+        Motorcycle moto2 = MotorcycleManager.getInstance().createMotorcycle(MotorcycleType.Type.SCRAMBLER, "Yamaha", "XJ 1200", 2002);
+        Motorcycle moto3 = MotorcycleManager.getInstance().createMotorcycle(MotorcycleType.Type.NAKED, "Triumph", "Speedtriple", 2001);
+
+
+        MotorcyclePhoto photo1 = new MotorcyclePhoto(new PhotoId(2), moto1);
+        MotorcyclePhoto photo2 = new MotorcyclePhoto(new PhotoId(3), moto2);
+        MotorcyclePhoto photo3 = new MotorcyclePhoto(new PhotoId(4), moto3);
         instance.addPhoto(photo1);
         instance.addPhoto(photo2);
         instance.addPhoto(photo3);
