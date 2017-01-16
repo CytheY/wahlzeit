@@ -61,8 +61,8 @@ public class Motorcycle {
     private void assertBuildYear() {
         Calendar cal = Calendar.getInstance();
 
-        if(buildYear < 1800 || buildYear > cal.YEAR){
-            throw new IllegalArgumentException("Buildyear have to be between 1800 and " + cal.YEAR);
+        if(buildYear < 1800 || buildYear > cal.get(Calendar.YEAR)){
+            throw new IllegalArgumentException("Buildyear have to be between 1800 and " + cal.get(Calendar.YEAR));
         }
     }
 
