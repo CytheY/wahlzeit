@@ -96,7 +96,7 @@ public class MotorcyclePhotoFactory extends PhotoFactory {
      * @methodtype factory
      */
     public MotorcyclePhoto createPhoto(PhotoId id, String brand, String model, int buildYear, MotorcycleType.Type type){
-        return new MotorcyclePhoto(id, new Motorcycle(new MotorcycleType(type), brand, model, buildYear));
+        return new MotorcyclePhoto(id, MotorcycleManager.getInstance().createMotorcycle(type, brand, model, buildYear));
     }
 
 }
