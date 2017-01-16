@@ -48,13 +48,12 @@ public class MotorcycleType extends DataObject {
     private Set<MotorcycleType> subTypes = new HashSet<>();
 
     public MotorcycleType(Type type){
-        this(type, null, null);
+        this(type, null);
     }
 
-    public MotorcycleType(Type type, MotorcycleType superType, Set<MotorcycleType> subTypes){
+    public MotorcycleType(Type type, MotorcycleType superType){
         this.type = type;
         this.superType = superType;
-        this.subTypes = subTypes;
     }
 
     public Motorcycle createInstance(String brand, String model, int buildYear) {
