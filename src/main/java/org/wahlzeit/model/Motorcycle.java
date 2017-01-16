@@ -19,8 +19,6 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import com.googlecode.objectify.annotation.Id;
-
 import java.util.Calendar;
 
 public class Motorcycle {
@@ -88,7 +86,7 @@ public class Motorcycle {
      * @return String: Name as <brand model (buildYear)>
      */
     public String getName() {
-        return getBrand() + " " + getModel() + "(" + getBuildYear() + ")";
+        return getBrand() + " " + getModel() + " (" + getBuildYear() + ")";
     }
 
     /**
