@@ -35,23 +35,28 @@ public class MotorcycleManager {
     }
 
     public Motorcycle createMotorcycle(MotorcycleType.Type typeName, String brand, String model, int buildYear) {
-        MotorcycleType ft = getMotorcycleType(typeName);
-        Motorcycle result = ft.createInstance( brand, model, buildYear);
+        addMotorcycleType(typeName);
+
+        MotorcycleType mt = getMotorcycleType(typeName);
+        Motorcycle result = mt.createInstance( brand, model, buildYear);
         motorcycles.put(result.getName(), result);
         return result;
     }
 
-
-    private MotorcycleType getMotorcycleType(MotorcycleType.Type typeName) {
-        if(!motorcycleTypes.containsKey(typeName)) {
-            MotorcycleType tmp = new MotorcycleType(typeName);
-            motorcycleTypes.put(typeName, tmp);
+    public void addMotorcycleType(MotorcycleType.Type type){
+        synchronized (motorcycleTypes){
+            if(!motorcycleTypes.containsKey(type)) {
+                MotorcycleType tmp = new MotorcycleType(type);
+                motorcycleTypes.put(type, tmp);
+            }
         }
+    }
 
+    public MotorcycleType getMotorcycleType(MotorcycleType.Type typeName) {
         return motorcycleTypes.get(typeName);
     }
 
-    private Motorcycle getMotorcycle(String name){
+    public Motorcycle getMotorcycle(String name){
         if(motorcycles.containsKey(name)) {
             return motorcycles.get(name);
         }
